@@ -3,13 +3,16 @@
 	<head>
 		<link rel="icon" 
       type="image/png" 
-      href="https://static.tumblr.com/dwobw22/BO2q1v4om/twitter_clone_logo.png">
+      href="https://static.tumblr.com/dwobw22/aMHq1yerk/logooooo.png">
 		<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+
+	<!-- Load an icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
@@ -21,25 +24,27 @@
 	</head>
 	<body>
 		<header class="site-header">
-  <nav class="navbar navbar-expand-md navbar-dark bg-steel  fixed-top">
+  <nav class="navbar navbar-expand-md navbar-light bg-steel fixed-top">
     <div class="container">
-      <a class="navbar-brand mr-4" href="/">Flutter!</a>
+	                <img src="https://static.tumblr.com/dwobw22/HiQq1yp0b/eeee.png" href="/"  width="40" height="30">
+      <a class="navbar-brand mr-4" href="/"><i class=""></i>Flutter!</a>             
+      <a class="navbar-item has-text-info" href="{{ url_for('home') }}">
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
-		<a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-	  <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+		<a class="nav-item nav-link" href="{{ url_for('home') }}"><i class="fa fa-fw fa-home"></i>Home</a>
         </div>
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
 		{% if current_user.is_authenticated %}
-		<a class="nav-item nav-link" href="{{ url_for('new_tweet') }}">New Post</a>
-		<a class="nav-item nav-link" href="{{ url_for('account') }}">Profile</a>
-		<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+		<a class="nav-item nav-link" href="{{ url_for('new_tweet') }}"><i class="fa fa-fw fa-plus"></i>New Post</a>
+		<a class="nav-item nav-link" href="{{ url_for('account') }}"><i class="fa fa-fw fa-user"></i>Profile</a>
+		<a class="nav-item nav-link" href="{{ url_for('logout') }}"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
 		{% else %}
-		<a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+		<a class="nav-item nav-link" href="{{ url_for('login') }}"><i class="fa fa-fw fa-sign-in"></i>Login</a>
 		<a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
 		{% endif %}
         </div>
@@ -61,21 +66,31 @@
 	{% endwith %}
       {% block content %}{% endblock %}
     </div>
-    <div class="col-md-4">
-      <div class="content-section">
-        <h3>Our Sidebar</h3>
-        <p class='text-muted'>You can put any information here you'd like.
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-light">Latest Posts</li>
-            <li class="list-group-item list-group-item-light">Announcements</li>
-            <li class="list-group-item list-group-item-light">Calendars</li>
-            <li class="list-group-item list-group-item-light">etc</li>
-          </ul>
-        </p>
+        <div class="col-md-4">
+          <div class="content-section">
+		   {% if current_user.is_authenticated %}
+		   <center>
+		   <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+		  <p class='text-muted'>Logged in as: @{{ current_user.username }}
+		   </center>
+              <ul class="list-group">
+		<li class="list-group-item list-group-item-light">My Posts</li>
+		<a href="{{ url_for('account') }}" class="list-group-item action">Profile</a>
+		<li class="list-group-item list-group-item-light">Following</li>
+                <li class="list-group-item list-group-item-light">Followers</li>
+		{% else %}
+		<center> <h3>Welcome to Flutter!</h3></center>
+		<br>
+		<p class='text-muted'>Flutter is an easy-to-use blogging website where you can posts updates to your followers whenever you like!
+		<br><br>
+		Join for free today!
+		{% endif %}
+              </ul>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</main>
+    </main>
 
 		    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

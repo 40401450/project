@@ -58,6 +58,6 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('This email is already registered.')
 
 class PostForm(FlaskForm):
-    title = StringField('Ttitle', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired(1)])
     submit = SubmitField('Post')
